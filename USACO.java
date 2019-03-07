@@ -50,6 +50,9 @@ public class USACO{
     }
     return level;
   }
+  public static int silver(String filename){
+    
+  }
   public static void main(String[] args) throws FileNotFoundException{
     System.out.println(bronze("test.txt"));
   }
