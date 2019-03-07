@@ -50,10 +50,26 @@ public class USACO{
     }
     return level;
   }
-  public static int silver(String filename){
-    
+  public static int silver(String filename) throws FileNotFoundException{
+    File f = new File(filename);
+    Scanner s = new Scanner(f);
+    int r = s.nextInt();
+    int c = s.nextInt();
+    int time = s.nextInt();
+    char[][] pasture = new char[r][c];
+    s.nextLine();
+    for (int x = 0; x < r; x++){
+      String line = s.nextLine();
+      for (int y = 0; y < c; y++){
+        pasture[x][y] = line.charAt(y);
+        System.out.print(pasture[x][y]);
+      }
+      System.out.println();
+    }
+    return 0;
   }
   public static void main(String[] args) throws FileNotFoundException{
     System.out.println(bronze("test.txt"));
+    silver("cow.txt");
   }
 }
