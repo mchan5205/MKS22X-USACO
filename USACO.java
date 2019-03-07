@@ -15,17 +15,42 @@ public class USACO{
       for (int y = 0; y < c; y++){
         field[x][y] = s.nextInt();
       }
-    }
+    }/*
+    File b = new File(filename);
+    Scanner g = new Scanner(b);
+    */
     for (int i = 0; i < n; i++){
-      Scanner.nextLine();
-      for (int z = 0; z < 4; z++){
-        int rs = s.nextInt();
-        int cs = s.nextInt();
-        int ds = s.nextInt();
+      s.nextLine();
+      int rs = s.nextInt() - 1;
+      int cs = s.nextInt() - 1;
+      int ds = s.nextInt();
+      int max = field[rs][cs];
+      for (int q = rs; q < 3; q ++){
+        for (int w = cs; w < 3; w++){
+          if (field[q][w] > max){
+            max = field[q][w];
+          }
+        }
+      }
+      for (int p = 0; p < 3; p++){
+        for (int o = 0; o < 3; o++){
+          if (field[p][o] > max - ds){
+            field[p][o] = max - ds;
+          }
+        }
       }
     }
+    int level = 0;
+    for (int t = 0; t < field.length; t++){
+      for (int h = 0; h < field[t].length; h++){
+        if (field[t][h] < e){
+          level += (e - field[t][h]) * 72 * 72;
+        }
+      }
+    }
+    return level;
   }
   public static void main(String[] args) throws FileNotFoundException{
-    bronze("test.txt");
+    System.out.println(bronze("test.txt"));
   }
 }
