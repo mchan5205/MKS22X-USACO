@@ -73,7 +73,6 @@ public class USACO{
       }
     }
     movecount[s.nextInt() - 1][s.nextInt() - 1] = 1;
-    ArrayList<Integer> moves = new ArrayList<>();
     for (int i = 0; i < time; i++){
       for (int z = 0; z < r; z++){
         for (int t = 0; t < c; t++){
@@ -94,20 +93,12 @@ public class USACO{
           }
         }
       }
-      System.out.println();
-      for (int j = 0; j < r; j++){
-        for (int k = 0; k < c; k++){
-          System.out.print(movecount[j][k]);
-        }
-        System.out.println();
-      }
       for (int q = 0; q < r; q++){
         for (int w = 0; w < c; w++){
           movecount[q][w] += toAdd[q][w];
           toAdd[q][w] = 0;
         }
       }
-      System.out.println();
     }
     return movecount[s.nextInt() - 1][s.nextInt() - 1];
   }
