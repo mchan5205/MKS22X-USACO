@@ -62,14 +62,51 @@ public class USACO{
       String line = s.nextLine();
       for (int y = 0; y < c; y++){
         pasture[x][y] = line.charAt(y);
-        System.out.print(pasture[x][y]);
       }
-      System.out.println();
     }
-    return 0;
+    int[][] movecount = new int[r][c];
+    System.out.print(movecount[0].length);
+    int[][] toAdd = new int[r][c];
+    for (int p = 0; p < r; p++){
+      for (int o = 0; p < c; o++){
+        movecount[p][o] = 0;
+        System.out.print(o);
+        toAdd[p][o] = 0;
+      }
+    }
+    s.nextLine();
+    movecount[s.nextInt()][s.nextInt()] = 1;
+    ArrayList<Integer> moves = new ArrayList<>();
+    for (int i = 0; i < time; i++){
+      for (int z = 0; z < r; z++){
+        for (int t = 0; t < c; t++){
+          if (movecount[z][t] > 0){
+            if (movecount[z + 1][t] != '*'){
+              toAdd[z + 1][t] += movecount[z][t];
+            }
+            if (movecount[z - 1][t] != '*'){
+              toAdd[z - 1][t] += movecount[z][t];
+            }
+            if (movecount[z][t + 1] != '*'){
+              toAdd[z][t + 1] += movecount[z][t];
+            }
+            if (movecount[z][t - 1] != '*'){
+              toAdd[z][t - 1] += movecount[z][t];
+            }
+            toAdd[z][t] -= movecount[z][t];
+          }
+        }
+      }
+      for (int q = 0; q < r; q++){
+        for (int w = 0; w < c; w++){
+          movecount[q][w] += toAdd[q][w];
+          toAdd[q][w] = 0;
+        }
+      }
+    }
+    return movecount[s.nextInt()][s.nextInt()];
   }
   public static void main(String[] args) throws FileNotFoundException{
-    System.out.println(bronze("test.txt"));
-    silver("cow.txt");
+    System.out.println(silver("ctravel.1.in"));
   }
 }
