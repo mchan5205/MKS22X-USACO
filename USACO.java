@@ -65,37 +65,41 @@ public class USACO{
       }
     }
     int[][] movecount = new int[r][c];
-    System.out.print(movecount[0].length);
     int[][] toAdd = new int[r][c];
     for (int p = 0; p < r; p++){
-      for (int o = 0; p < c; o++){
+      for (int o = 0; o < c; o++){
         movecount[p][o] = 0;
-        System.out.print(o);
         toAdd[p][o] = 0;
       }
     }
-    s.nextLine();
-    movecount[s.nextInt()][s.nextInt()] = 1;
+    movecount[s.nextInt() - 1][s.nextInt() - 1] = 1;
     ArrayList<Integer> moves = new ArrayList<>();
     for (int i = 0; i < time; i++){
       for (int z = 0; z < r; z++){
         for (int t = 0; t < c; t++){
           if (movecount[z][t] > 0){
-            if (movecount[z + 1][t] != '*'){
+            if (z + 1 < r && pasture[z + 1][t] != '*'){
               toAdd[z + 1][t] += movecount[z][t];
             }
-            if (movecount[z - 1][t] != '*'){
+            if (z - 1 >= 0 && pasture[z - 1][t] != '*'){
               toAdd[z - 1][t] += movecount[z][t];
             }
-            if (movecount[z][t + 1] != '*'){
+            if (t + 1 < c && pasture[z][t + 1] != '*'){
               toAdd[z][t + 1] += movecount[z][t];
             }
-            if (movecount[z][t - 1] != '*'){
+            if (t - 1 >= 0 && pasture[z][t - 1] != '*'){
               toAdd[z][t - 1] += movecount[z][t];
             }
             toAdd[z][t] -= movecount[z][t];
           }
         }
+      }
+      System.out.println();
+      for (int j = 0; j < r; j++){
+        for (int k = 0; k < c; k++){
+          System.out.print(movecount[j][k]);
+        }
+        System.out.println();
       }
       for (int q = 0; q < r; q++){
         for (int w = 0; w < c; w++){
@@ -103,10 +107,11 @@ public class USACO{
           toAdd[q][w] = 0;
         }
       }
+      System.out.println();
     }
-    return movecount[s.nextInt()][s.nextInt()];
+    return movecount[s.nextInt() - 1][s.nextInt() - 1];
   }
   public static void main(String[] args) throws FileNotFoundException{
-    System.out.println(silver("ctravel.1.in"));
+    System.out.println(silver("ctravel.2.in"));
   }
 }
